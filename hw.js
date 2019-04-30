@@ -18,7 +18,11 @@
 //   Expect sumOfNums([])) to equal 0
 
 const sumOfNums = function (numsArray) {
-
+  let x = 0;
+  numsArray.map((spot) => {
+    x += spot
+  })
+  return x;
   // Your Code Here
 }
 
@@ -32,8 +36,11 @@ const sumOfNums = function (numsArray) {
 //   Expect numsGreaterThanTen([-1, 0, 1, 9, 9.5, 9.99, 10, 11, 20, 100]) to equal [11, 20, 100]
 
 const numsGreaterThanTen = function (numsArray) {
-
-  // Your Code Here
+  let x = numsArray.filter((spot) => {
+    return spot > 10
+  }
+  )
+  return x
 }
 
 // #3
@@ -49,7 +56,15 @@ const numsGreaterThanTen = function (numsArray) {
 //   Expect allGreaterThanTen([])).to.equal(true);
 
 const allGreaterThanTen = function (numsArray) {
-
+  let x = numsArray.filter((spot) => {
+    return spot > 10
+  }
+  )
+  if (x.length === numsArray.length) {
+    return true
+  } else {
+    return false
+  }
   // Your Code Here
 }
 
@@ -61,8 +76,11 @@ const allGreaterThanTen = function (numsArray) {
 //    to equal ['alphabet', 'banana', 'carrot']
 
 const wordsWithAtLeastFiveLetters = function (words) {
-
-  // Your Code Here
+  let x = words.filter((spot) => {
+    return spot.length > 4
+  }
+  )
+  return x
 }
 
 // #5
@@ -76,8 +94,16 @@ const wordsWithAtLeastFiveLetters = function (words) {
 //  Expect allStartingWithA([]) to equal true
 
 const allStartingWithA = function (words) {
+  let passingSet = words.filter((word) => {
+    if (word[0] === 'a' || word[0] === 'A')
+      return word
+  })
+  if (passingSet.length === words.length) {
+    return true
+  } else {
+    return false
+  }
 
-  // Your Code Here
 }
 
 // #6
@@ -86,10 +112,17 @@ const allStartingWithA = function (words) {
 //          (case-insensitive), `false` otherwise
 // Test Cases: 
 //   Expect anyStartingWithB(['Amy', 'Bob']) to equal true
-//   Expect anyStartingWithB(['apple', 'alligator', 'Arkansas'])) to equal false
-const anyStartingWithB = function (words) {
 
-  // Your Code Here
+//   Expect anyStartingWithB(['apple', 'alligator', 'Arkansas'])) to equal false
+
+const anyStartingWithB = function (words) {
+  let answer = false
+  words.map((eachWord) => {
+    if (eachWord[0] === 'b' || eachWord[0] === 'B') {
+      answer = true
+    }
+  })
+  return answer
 }
 
 // This last set of functions are all related to one another! Use functions 7 to solve function 8,
@@ -106,10 +139,23 @@ const anyStartingWithB = function (words) {
 //    This case should be true as long as n is less or equal to 6
 //  Expect hasAtLeastNVowels('dangerous', 5) to equal false
 //  Expect hasAtLeastNVowels('banana', -1) to equal null
-const hasAtLeastNVowels = function (word, n) {
 
-  // Your Code Here
+const hasAtLeastNVowels = function (word, n) {
+  if (n < 0) { return null }
+  let numOfVowels = 0;
+  let brokenIntoAnArray = word.toLowerCase().split("")
+
+  brokenIntoAnArray.map(letter => {
+    if (letter === 'a' || letter === 'e' || letter === 'i' || letter === 'o' || letter === 'u')
+      numOfVowels++
+  })
+  if (numOfVowels >= n) {
+    return true
+  } 
+    return false
+  
 }
+
 
 // #8
 // Input: an array of words
@@ -119,11 +165,24 @@ const hasAtLeastNVowels = function (word, n) {
 //   Expect wordsWithAtLeastTwoVowels(['alphabet', 'bun', 'can', 'doe', 'egg'])
 //     to equal ['alphabet', 'doe']
 
-const wordsWithAtLeastTwoVowels = function (words) {
-
-  // Your Code Here
+const wordsWithAtLeastTwoVowels = function(words) {
+  let wordsWithTwo = []
+  words.map(eachWord => {
+    eachWord.toLowerCase()
+    let numOfVowels = 0;
+    let x = eachWord.split("")
+    x.map((letter2) => {
+      let lowercaseLetter = letter2.toLowerCase()
+      if (lowercaseLetter === 'a' || lowercaseLetter === 'e' || lowercaseLetter === 'i' || lowercaseLetter === 'o' || lowercaseLetter === 'u')
+        numOfVowels++
+    })
+    if (numOfVowels >= 2) {
+      wordsWithTwo.push(eachWord)
+    }
+  })
+  return wordsWithTwo;
 }
-
+ 
 // #9
 // Input: an array of words
 // Output: `true` if ALL words have two or more vowels, `false` otherwise
@@ -134,8 +193,13 @@ const wordsWithAtLeastTwoVowels = function (words) {
 //  Expect allHaveAtLeastTwoVowels([]) to equal true
 
 const allHaveAtLeastTwoVowels = function (words) {
+let checkForTwo = wordsWithAtLeastTwoVowels(words)
+if(checkForTwo.length === words.length){
+  return true
+}else{
+  return false
+}
 
-  // Your Code Here
 }
 
 // #10
@@ -146,8 +210,14 @@ const allHaveAtLeastTwoVowels = function (words) {
 //  Expect anyHaveAtLeastTwoVowels(['apple', 'alligator', 'Arkansas'])) to equal true
 //  Expect anyHaveAtLeastTwoVowels(['APPLE', 'bun', 'CAT'])) to equal true
 const anyHaveAtLeastTwoVowels = function (words) {
+let checking = wordsWithAtLeastTwoVowels(words)
+console.log(checking.length)
+if(checking.length > 0){
+  return true
+}else{
+  return false
+}
 
-  // Your Code Here
 }
 
 // #11
@@ -162,8 +232,13 @@ const anyHaveAtLeastTwoVowels = function (words) {
 //   Expect noneHaveTwoOrMoreVowels([]) to equal true
 
 const noneHaveTwoOrMoreVowels = function (words) {
+let x = wordsWithAtLeastTwoVowels(words)
+if(x.length === 0){
+  return true
+}else{
+  return false
+}
 
-  // Your Code Here
 }
 
 // #12
@@ -177,9 +252,12 @@ const noneHaveTwoOrMoreVowels = function (words) {
 //    to equal {'apple': 5, 'banana': 6, 'cranberry': 9}
 
 const buildObjectFromWords = function (words) {
-
-  // Your Code Here
-}
+  let myNewObject = {};
+  words.map((eachWord)=>{
+  myNewObject[eachWord] = eachWord.length
+  })
+  return myNewObject
+  }
 
 
 /// DO NOT EDIT BELOW THIS LINE ///
